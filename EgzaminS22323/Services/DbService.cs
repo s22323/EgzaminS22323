@@ -1,4 +1,5 @@
 ﻿using EgzaminS22323.DTOs;
+using EgzaminS22323.Enum;
 using EgzaminS22323.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace EgzaminS22323.Services
             Project project = await context.Projects.FindAsync(id);
             if (project == null)
             {
-                throw new Exception("Project doesnt exist");
+               
             }
             ProjectDTO projectDTO = await context.Projects.Where(e => e.IdTeam == id)
                 .Select(e => new ProjectDTO
@@ -37,7 +38,7 @@ namespace EgzaminS22323.Services
 
         public async System.Threading.Tasks.Task addTask(AddTaskRequest task)
         {
-            
+
             await context.AddAsync(new Models.Task
             {
                 Name = task.Name,
@@ -47,6 +48,12 @@ namespace EgzaminS22323.Services
                 IdAssignedTo = task.IdAssignedTo,
                 IdCreator = task.IdCreator,
                 IdTaskType = task.taskType.IdTaskType
+            });
+
+            await context.AddAsync(new TaskType
+            {
+                IdTaskType = task.taskType.IdTaskType,
+                Name = task.taskType.Name
             });
 
             await context.SaveChangesAsync();
