@@ -16,7 +16,7 @@ namespace EgzaminS22323.Services
             Project project = await context.Projects.FindAsync(id);
             if (project == null)
             {
-               
+                throw new Exception("Project doesnt exitst");
             }
             ProjectDTO projectDTO = await context.Projects.Where(e => e.IdTeam == id)
                 .Select(e => new ProjectDTO
