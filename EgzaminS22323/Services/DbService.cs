@@ -28,7 +28,7 @@ namespace EgzaminS22323.Services
                         Description = e.Description,
                         Deadline = e.Deadline,
                         TaskType = e.ITaskTypeNavigation.Name
-                    })
+                    }).OrderByDescending(e => e.Deadline)
 
                 }).FirstAsync();
 
@@ -37,6 +37,7 @@ namespace EgzaminS22323.Services
 
         public async System.Threading.Tasks.Task addTask(AddTaskRequest task)
         {
+            
             await context.AddAsync(new Models.Task
             {
                 Name = task.Name,

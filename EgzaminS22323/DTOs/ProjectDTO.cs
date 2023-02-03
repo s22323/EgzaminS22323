@@ -4,6 +4,7 @@
     {
         public string ProjectName { get; set; }
 
-       public IEnumerable<TaskDTO> Tasks { get; set; }
+        public IEnumerable<TaskDTO> Tasks { get; set; }
 
+    }
 }
